@@ -3,7 +3,9 @@ import path from 'path';
 import trataErros from './erros/funcoesErros.js'
 import { contaPalavras } from './index.js';
 import { montaSaidaArquivo } from './helpers.js';
-import {Command} from 'comander';
+import {Command} from 'commander' 
+import chalk from 'chalk';
+
 
 const program = new Command();
 
@@ -15,9 +17,9 @@ program
         const {texto, destino} = options;
 
         if (!texto || !destino){
-            console.error ('O caminho e destino precisam ser preenchidos!')
+            console.error (chalk.red('O caminho e destino precisam ser preenchidos!'))
             program.help();
-            return
+            return;
         }
 
         const caminhoTexto = path.resolve(texto);
@@ -25,7 +27,7 @@ program
 
         try{
             processaArquivo(caminhoTexto, caminhoDestino)
-            console.log('texto processado com sucesso')
+            console.log(chalk.green('texto processado com sucesso'))
         }catch(erro){
             console.log('ocorreu um erro:', erro);
         }
